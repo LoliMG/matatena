@@ -1,0 +1,281 @@
+.game-body {
+    background-image: url("../../resources/game-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    min-height: 100vh;
+    height: 100vh;
+    font-family: var(--body-font);
+    overflow: hidden;
+    padding: 2vh 3vw;
+    box-sizing: border-box;
+
+    /* -------------------------------------------------------------
+       SIDE PANELS (JUGADOR 1 Left / JUGADOR 2 Right)
+    ------------------------------------------------------------- */
+    .side-panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 260px;
+        z-index: 100;
+
+        .player-card-box {
+            width: 100%;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            box-sizing: border-box;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+
+            .player-title {
+                color: var(--white-color);
+                font-size: 1.2rem;
+                font-weight: 700;
+                letter-spacing: 0.1rem;
+                margin: 0;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            .dice-box {
+                width: 100px;
+                height: 100px;
+                border-radius: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+            }
+
+            .my-button {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                transform: none;
+                padding: 0.6rem 1.2rem;
+                font-size: 13px;
+                white-space: nowrap;
+
+                &.disabled,
+                &:disabled {
+                    opacity: 0.25;
+                    cursor: not-allowed;
+                    pointer-events: none;
+                    filter: grayscale(100%);
+                }
+            }
+        }
+
+        /* Player 1 Side Panel (Red Cult Theme) */
+        &.p1-side {
+            .player-card-box {
+                background-color: rgba(40, 10, 10, 0.45);
+                border: 2px solid var(--skin-color);
+
+                .dice-box {
+                    background: rgba(20, 5, 5, 0.4);
+                    border: 2px dashed rgba(255, 77, 77, 0.4);
+                }
+            }
+        }
+
+        /* Player 2 Side Panel (Dark / Greyish Theme) */
+        &.p2-side {
+            .player-card-box {
+                background-color: rgba(30, 30, 35, 0.55);
+                border: 2px solid #5a5a66;
+
+                .dice-box {
+                    background: rgba(15, 15, 20, 0.5);
+                    border: 2px dashed rgba(160, 160, 180, 0.4);
+                }
+            }
+        }
+
+        .exit-button-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+
+            .my-button {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                transform: none;
+            }
+        }
+    }
+
+    /* -------------------------------------------------------------
+       CENTER GAME BOARDS AREA & GAME OVER BANNER
+    ------------------------------------------------------------- */
+    .game-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2rem;
+        flex: 1;
+        max-width: 500px;
+        height: 100%;
+        padding-top: 2vh;
+        box-sizing: border-box;
+
+        .game-over-banner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            backdrop-filter: none;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            z-index: 200;
+
+            .winner-text {
+                color: var(--white-color);
+                font-size: 1.6rem;
+                font-weight: 800;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+                letter-spacing: 0.05rem;
+                margin: 0;
+                text-align: center;
+            }
+
+            .my-button {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                transform: none;
+                padding: 0.7rem 1.6rem;
+                font-size: 14px;
+            }
+        }
+
+        .player-board {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            transition: opacity 0.3s, transform 0.3s;
+
+            &.active-turn {
+                opacity: 1;
+                filter: drop-shadow(0 0 14px rgba(255, 60, 60, 0.6));
+            }
+
+            .player-header {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                color: var(--white-color);
+                font-weight: 600;
+                font-size: 1rem;
+                padding: 0 0.25rem;
+
+                .total-score {
+                    color: var(--white-color);
+                    font-size: 1.1rem;
+
+                    strong {
+                        font-size: 1.25rem;
+                        color: var(--white-color);
+                    }
+                }
+            }
+
+            .player-area {
+                width: clamp(220px, 25vw, 340px);
+                aspect-ratio: 1;
+                border-radius: 10px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 0.5rem;
+                padding: 0.5rem;
+                box-sizing: border-box;
+
+                .dice-area {
+                    width: 100%;
+                    height: 100%;
+                    aspect-ratio: 1;
+                    background-color: rgba(255, 255, 255, 0.05);
+                    border: 2px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 6px;
+                    box-sizing: border-box;
+                    transition: background-color 0.2s, border-color 0.2s, transform 0.15s;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    outline: none;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.15);
+                        border-color: rgba(255, 255, 255, 0.7);
+                    }
+
+                    &.has-dice {
+                        background-color: rgba(0, 0, 0, 0.15);
+                    }
+                }
+            }
+
+            /* Player 1 Board Style (Red Cult Theme) */
+            &[data-player="0"] {
+                .player-area {
+                    background-color: rgba(129, 3, 3, 0.25);
+                    border: 3px solid var(--skin-color);
+                }
+            }
+
+            /* Player 2 Board Style (Dark Greyish Theme) */
+            &[data-player="1"] {
+                &.active-turn {
+                    filter: drop-shadow(0 0 14px rgba(180, 180, 200, 0.5));
+                }
+
+                .player-area {
+                    background-color: rgba(35, 35, 42, 0.45);
+                    border: 3px solid #6b6b78;
+
+                    .dice-area {
+                        background-color: rgba(255, 255, 255, 0.03);
+                        border-color: rgba(255, 255, 255, 0.15);
+
+                        &:hover {
+                            background-color: rgba(255, 255, 255, 0.1);
+                            border-color: rgba(255, 255, 255, 0.5);
+                        }
+                    }
+                }
+            }
+
+            .column-scores {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 0;
+                color: var(--white-color);
+                font-weight: 700;
+                font-size: 1.15rem;
+                box-sizing: border-box;
+
+                .score-val {
+                    width: 33.33%;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

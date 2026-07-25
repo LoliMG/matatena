@@ -1,0 +1,280 @@
+/* -------------------------------------------------------------
+   3D CUBE STYLING & ROTATION
+------------------------------------------------------------- */
+.cube-container {
+    width: 64px;
+    height: 64px;
+    perspective: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .cube {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1s cubic-bezier(0.2, 0.8, 0.3, 1);
+
+        .cube-face {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            background: #f5f0dc;
+            border: 2px solid #2b1d1d;
+            border-radius: 10px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+
+            &.face-1 {
+                transform: translateZ(32px);
+            }
+
+            &.face-2 {
+                transform: rotateY(180deg) translateZ(32px);
+            }
+
+            &.face-3 {
+                transform: rotateY(90deg) translateZ(32px);
+            }
+
+            &.face-4 {
+                transform: rotateY(-90deg) translateZ(32px);
+            }
+
+            &.face-5 {
+                transform: rotateX(90deg) translateZ(32px);
+            }
+
+            &.face-6 {
+                transform: rotateX(-90deg) translateZ(32px);
+            }
+        }
+    }
+}
+
+/* PIPS GRID (DOTS) */
+.pips-grid {
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+
+    .pip {
+        width: 10px;
+        height: 10px;
+        background-color: #2b1d1d;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Specific Pip Positions */
+.pips-1 .pip-1 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.pips-2 {
+    .pip-1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .pip-2 {
+        grid-column: 3;
+        grid-row: 3;
+    }
+}
+
+.pips-3 {
+    .pip-1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .pip-2 {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .pip-3 {
+        grid-column: 3;
+        grid-row: 3;
+    }
+}
+
+.pips-4 {
+    .pip-1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .pip-2 {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .pip-3 {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .pip-4 {
+        grid-column: 3;
+        grid-row: 3;
+    }
+}
+
+.pips-5 {
+    .pip-1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .pip-2 {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .pip-3 {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .pip-4 {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .pip-5 {
+        grid-column: 3;
+        grid-row: 3;
+    }
+}
+
+.pips-6 {
+    .pip-1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .pip-2 {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .pip-3 {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .pip-4 {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .pip-5 {
+        grid-column: 3;
+        grid-row: 2;
+    }
+
+    .pip-6 {
+        grid-column: 3;
+        grid-row: 3;
+    }
+}
+
+/* -------------------------------------------------------------
+   BOARD DICE (Cult of the Lamb Style & Animations)
+------------------------------------------------------------- */
+@keyframes popIn {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shrinkOut {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.board-dice-face {
+    width: 88%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.5);
+    border: 2px solid #2b1d1d;
+    transition: background 0.3s, transform 0.2s;
+    box-sizing: border-box;
+
+    &.pop-in {
+        animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    &.shrinking {
+        animation: shrinkOut 0.2s ease-in forwards !important;
+    }
+}
+
+/* Single Dice (Ivory/Beige) */
+.dice-area.match-single {
+    .board-dice-face {
+        background: #f5f0dc;
+
+        .pip {
+            background-color: #2b1d1d;
+        }
+    }
+}
+
+/* Double Match (Blue Highlight like Cult of the Lamb) */
+.dice-area.match-double {
+    .board-dice-face {
+        background: #5c9bcf;
+        border-color: #1d4d75;
+
+        .pip {
+            background-color: #0d2336;
+        }
+    }
+}
+
+/* Triple Match (Gold/Yellow Highlight like Cult of the Lamb) */
+.dice-area.match-triple {
+    .board-dice-face {
+        background: #e6be48;
+        border-color: #7a5c10;
+
+        .pip {
+            background-color: #3b2b00;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+:root {
+    --body-font: "Poppins", sans-serif;
+
+    /* Responsive sizes for the matatena letters */
+    --item-size: clamp(30px, 8vw, 80px);
+    --gap-size: clamp(6px, 2vw, 24px);
+    --inset-size: calc(var(--item-size) * 0.12);
+    --font-size: calc(var(--item-size) * 0.35);
+
+    --skin-color: #dc2c2c;
+    --dark-black-color: #810303;
+    --border-color: #ffffff;
+    --white-color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: var(--body-font);
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}

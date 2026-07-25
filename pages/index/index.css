@@ -1,0 +1,122 @@
+.index-body {
+  background-image: url("../../resources/initial-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .button-container {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+}
+
+
+/* Letters container and items */
+.letters-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 2rem;
+}
+
+.zigzag__container {
+  position: absolute;
+  display: flex;
+  gap: var(--gap-size);
+}
+
+.zigzag__container:nth-child(1) {
+  z-index: 2;
+}
+
+.zigzag__container:nth-child(2) {
+  transform: rotate(180deg);
+  z-index: 1;
+}
+
+.zigzag__item {
+  display: block;
+  height: var(--item-size);
+  width: var(--item-size);
+  position: relative;
+  overflow: hidden;
+  transform: rotate(315deg);
+}
+
+.zigzag__item::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--skin-color));
+  transform: translateX(-100%);
+  animation: animateBefore 4s linear infinite;
+  animation-delay: calc(1s * var(--i));
+}
+
+@keyframes animateBefore {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  25%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.zigzag__item::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--skin-color));
+  transform: translateY(-100%);
+  animation: animateAfter 4s linear infinite;
+  animation-delay: calc(1s * var(--i));
+}
+
+@keyframes animateAfter {
+
+  0%,
+  12.5% {
+    transform: translateY(-100%);
+  }
+
+  37.5%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.zigzag__item span {
+  position: absolute;
+  cursor: pointer;
+  inset: var(--inset-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-black-color);
+  outline: 1px solid var(--border-color);
+  transition: 0.3s linear;
+}
+
+.zigzag__container:nth-child(1) .zigzag__item span:hover {
+  outline-offset: -5px;
+}
+
+.zigzag__item span b {
+  font-weight: normal;
+  font-size: var(--font-size);
+  transform: rotate(45deg);
+  color: var(--white-color);
+}
