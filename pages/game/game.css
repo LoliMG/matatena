@@ -14,7 +14,7 @@
     box-sizing: border-box;
 
     /* -------------------------------------------------------------
-       SIDE PANELS (JUGADOR 1 Left / JUGADOR 2 Right)
+       SIDE PANELS (DESKTOP: JUGADOR 1 Left / JUGADOR 2 Right)
     ------------------------------------------------------------- */
     .side-panel {
         display: flex;
@@ -282,6 +282,151 @@
                 .score-val {
                     width: 33.33%;
                     text-align: center;
+                }
+            }
+        }
+    }
+}
+
+/* -------------------------------------------------------------
+   MOBILE LAYOUT RESPONSIVENESS (Max Width 768px)
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .game-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            "p1card p2card"
+            "gameboard gameboard"
+            "exitbtn exitbtn";
+        gap: 0.5rem;
+        padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        justify-items: center;
+        align-items: start;
+
+        .side-panel {
+            display: contents;
+
+            .player-card-box {
+                padding: 0.45rem 0.35rem;
+                gap: 0.3rem;
+
+                &.p1-card {
+                    grid-area: p1card;
+                    width: 100%;
+                    max-width: 210px;
+                }
+
+                &.p2-card {
+                    grid-area: p2card;
+                    width: 100%;
+                    max-width: 210px;
+                }
+
+                .player-title {
+                    font-size: clamp(0.75rem, 3.5vw, 0.9rem);
+                    letter-spacing: 0.05rem;
+                }
+
+                .dice-box {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 10px;
+
+                    .cube-container {
+                        transform: scale(0.7);
+                        transform-origin: center center;
+                    }
+                }
+
+                .my-button {
+                    padding: 0.3rem 0.6rem;
+                    font-size: 11px;
+                    letter-spacing: 0.02rem;
+                }
+            }
+
+            .exit-button-container {
+                grid-area: exitbtn;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-top: 0.2rem;
+
+                .my-button {
+                    position: relative;
+                    bottom: auto;
+                    left: auto;
+                    transform: none;
+                    padding: 0.35rem 1.2rem;
+                    font-size: 11px;
+                }
+            }
+        }
+
+        .game-area {
+            grid-area: gameboard;
+            width: 100%;
+            max-width: 440px;
+            height: auto;
+            max-height: none;
+            gap: 0.35rem;
+            flex: none;
+
+            .player-board {
+                gap: 0.2rem;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+
+                .player-header {
+                    justify-content: center;
+                    padding: 0 0.5rem;
+
+                    .total-score {
+                        font-size: 0.85rem;
+
+                        strong {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+
+                .player-area {
+                    width: min(65vw, 210px);
+                    height: min(65vw, 210px);
+                    padding: 0.3rem;
+                    gap: 0.3rem;
+                    border-radius: 8px;
+                    border-width: 2px;
+
+                    .dice-area {
+                        border-radius: 5px;
+                        border-width: 1.5px;
+                    }
+                }
+
+                .column-scores {
+                    font-size: 0.85rem;
+                    width: min(65vw, 210px);
+                }
+            }
+
+            .game-over-banner {
+                gap: 0.4rem;
+
+                .winner-text {
+                    font-size: 1.1rem;
+                }
+
+                .my-button {
+                    padding: 0.35rem 0.9rem;
+                    font-size: 11px;
                 }
             }
         }
